@@ -1,0 +1,15 @@
+mongod
+
+npm init -y
+
+npm install express mongoose
+
+npm install -g nodemon
+
+nodemon app.js
+
+usersDB in MongoDB Compass
+
+routes/userRoutes.js
+models/user.js 
+app.js 

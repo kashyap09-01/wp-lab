@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Shopping Cart</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+      }
+      .list,
+      .cart {
+        border: 1px solid #ccc;
+        padding: 10px;
+        width: 45%;
+        border-radius: 5px;
+      }
+      .item {
+        display: flex;
+        justify-content: space-between;
+        margin: 5px 0;
+        padding: 5px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        background-color: white;
+      }
+      button {
+        margin-left: 5px;
+        padding: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 3px;
+      }
+      .move {
+        background-color: #ffc107;
+      }
+      .delete {
+        background-color: #dc3545;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Shopping Cart</h1>
+
+    <!-- Input and Actions -->
+    <div>
+      <input id="newItem" type="text" placeholder="Enter item name" />
+      <button onclick="addItem()">Add Item</button>
+      <button onclick="toggleFont()">Toggle Font</button>
+      <button onclick="toggleColor()">Toggle Color</button>
+    </div>
+
+    <!-- Lists -->
+    <div class="container">
+      <div class="list">
+        <h3>Available Items</h3>
+        <div id="itemList"></div>
+      </div>
+      <div class="cart">
+        <h3>Shopping Cart</h3>
+        <div id="cartList"></div>
+      </div>
+    </div>
+
+    <script>
+      // Add a new item
+      function addItem() {
+        const input = document.getElementById("newItem");
+        const name = input.value.trim();
+        if (!name) return alert("Enter an item name!");
+        createItem(name, "itemList");
+        input.value = ""; // Clear input field
+      }
+
+      // Create and append an item
+      function createItem(name, listId) {
+        const list = document.getElementById(listId);
+        const item = document.createElement("div");
+        item.className = "item";
+
+        item.innerHTML = `
+        <span>${name}</span>
+        <div>
+          <button class="move" onclick="moveItem(this)">Move</button>
+          <button class="delete" onclick="deleteItem(this)">Delete</button>
+        </div>
+      `;
+        list.appendChild(item);
+      }
+
+      // Move item between lists
+      function moveItem(button) {
+        const item = button.closest(".item");
+        const targetList =
+          item.parentElement.id === "itemList" ? "cartList" : "itemList";
+        document.getElementById(targetList).appendChild(item);
+      }
+
+      // Delete an item
+      function deleteItem(button) {
+        button.closest(".item").remove();
+      }
+
+      // Toggle font style
+      function toggleFont() {
+        document.querySelectorAll(".item span").forEach((span) => {
+          if (!span.style.fontFamily) {
+            span.style.fontFamily = "Arial"; // Default to Arial if not set
+          }
+          span.style.fontFamily =
+            span.style.fontFamily === "Courier New" ? "Arial" : "Courier New";
+        });
+      }
+
+      // Toggle background color
+      function toggleColor() {
+        document.querySelectorAll(".item").forEach((item) => {
+          if (!item.style.backgroundColor) {
+            item.style.backgroundColor = "white"; // Default to white if not set
+          }
+          item.style.backgroundColor =
+            item.style.backgroundColor === "lightyellow"
+              ? "white"
+              : "lightyellow";
+        });
+      }
+    </script>
+  </body>
+</html>

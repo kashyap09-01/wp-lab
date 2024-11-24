@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JavaScript Inline Events</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      button {
+        padding: 10px 20px;
+        background: #007bff;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin: 5px;
+      }
+      #hoverBox {
+        width: 200px;
+        height: 100px;
+        background: lightblue;
+        text-align: center;
+        line-height: 100px;
+        margin: 20px 0;
+      }
+      #textInput,
+      #dropdown {
+        display: block;
+        margin: 10px 0;
+        padding: 5px;
+      }
+      #output {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>JavaScript Inline Event Handling</h1>
+
+    <!-- 1. Click Event -->
+    <button onclick="handleClick()">Click Me</button>
+
+    <!-- 2. Mouseover Event -->
+    <div id="hoverBox" onmouseover="handleMouseOver(this)">Hover Over Me</div>
+
+    <!-- 3. Mouseout Event -->
+    <p id="hoverText" onmouseout="handleMouseOut(this)">
+      Hover to see me change color.
+    </p>
+
+    <!-- 4. Keydown Event -->
+    <input
+      id="textInput"
+      placeholder="Type something..."
+      onkeydown="handleKeydown(event)"
+    />
+
+    <!-- 5. Change Event -->
+    <select id="dropdown" onchange="handleChange(event)">
+      <option value="">Select an option</option>
+      <option>Option 1</option>
+      <option>Option 2</option>
+    </select>
+
+    <!-- 6. Submit Event -->
+    <form onsubmit="handleSubmit(event)">
+      <input placeholder="Enter your name" required />
+      <button type="submit">Submit</button>
+    </form>
+
+    <!-- Output Section -->
+    <div id="output"></div>
+
+    <script>
+      function handleClick() {
+        document.getElementById("output").innerText = "Button clicked!";
+      }
+
+      function handleMouseOver(element) {
+        element.style.background = "lightgreen";
+        element.innerText = "You hovered over me!";
+      }
+
+      function handleMouseOut(element) {
+        element.style.color = "red";
+        element.innerText = "Text changed on mouse out!";
+      }
+
+      function handleKeydown(event) {
+        document.getElementById(
+          "output"
+        ).innerText = `Key pressed: ${event.key}`;
+      }
+
+      function handleChange(event) {
+        document.getElementById(
+          "output"
+        ).innerText = `You selected: ${event.target.value}`;
+      }
+
+      function handleSubmit(event) {
+        event.preventDefault();
+        document.getElementById("output").innerText = "Form submitted!";
+      }
+    </script>
+  </body>
+</html>
